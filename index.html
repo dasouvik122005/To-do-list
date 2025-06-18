@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <title>Advanced To‑Do List</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="light">
+  <div class="container">
+    <div class="todo-app">
+      <div class="header">
+        <h2>To‑Do List <img src="icon.png" alt="" /></h2>
+        <button id="theme-toggle" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+      </div>
+
+      <div class="row">
+        <input type="text" id="input-box" placeholder="Add your task" />
+        <input type="datetime-local" id="due-date" />
+        <input type="text" id="tag-box" placeholder="Tag (e.g. Work)" />
+        <select id="priority-select">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <button id="add-btn"><i class="fas fa-plus"></i> Add</button>
+      </div>
+
+      <div class="filter-section">
+        <input type="text" id="search-box" placeholder="Search tasks…" />
+        <select id="filter-priority">
+          <option value="all">All Priorities</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <select id="filter-status">
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+        </select>
+        <select id="sort-by">
+          <option value="added-asc">Added (Oldest First)</option>
+          <option value="added-desc">Added (Newest First)</option>
+          <option value="due-asc">Due Date (Soonest)</option>
+          <option value="due-desc">Due Date (Latest)</option>
+          <option value="priority-desc">Priority (High to Low)</option>
+        </select>
+      </div>
+
+      <div class="priority-section">
+        <h3>High Priority</h3>
+        <ul id="high-priority-list" class="task-list">
+          <li class="empty-message">No high priority tasks yet!</li>
+        </ul>
+      </div>
+      <div class="priority-section">
+        <h3>Medium Priority</h3>
+        <ul id="medium-priority-list" class="task-list">
+          <li class="empty-message">No medium priority tasks yet!</li>
+        </ul>
+      </div>
+      <div class="priority-section">
+        <h3>Low Priority</h3>
+        <ul id="low-priority-list" class="task-list">
+          <li class="empty-message">No low priority tasks yet!</li>
+        </ul>
+      </div>
+
+      <div class="footer">
+        <span id="pending-tasks-count">0 pending tasks</span>
+        <div class="footer-buttons">
+          <button id="clear-completed-btn"><i class="fas fa-trash"></i> Clear Completed</button>
+          <button id="download-tasks-btn"><i class="fas fa-download"></i> Download Tasks</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
