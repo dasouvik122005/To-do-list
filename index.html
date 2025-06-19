@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TO DO LIST APP - AN TUTORIAL</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="todo-app">
+      <h2>To-Do List <img src="icon.png" alt="icon" /></h2>
+      <br>
+      <div class="row">
+        <input type="text" id="input-box" placeholder="Add your text" />
+        <button onclick="addTask()">Add</button>
+      </div>
+      <div class="action-row">
+        <button onclick="clearCompleted()">Clear Completed</button>
+        <button onclick="clearAll()">Clear All</button>
+      </div>
+      <div class="task-summary">
+        <p>Total: <span id="total-count">0</span></p>
+        <p>Completed: <span id="completed-count">0</span></p>
+      </div>
+      <ul id="list-container"></ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
