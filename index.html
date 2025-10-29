@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TO DO LIST APP - AN TUTORIAL</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A simple, accessible and responsive to‑do list app." />
+  <title>To‑Do — Productivity</title>
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="todo-app">
-      <h2>To-Do List <img src="icon.png" alt="icon" /></h2>
-      <br>
-      <div class="row">
-        <input type="text" id="input-box" placeholder="Add your text" />
-        <button onclick="addTask()">Add</button>
+  <main class="container" aria-labelledby="app-title">
+    <section class="todo-app" role="application" aria-labelledby="app-title">
+      <header class="app-header">
+        <h1 id="app-title">To‑Do List</h1>
+        <!-- <p class="subtitle">Focus on what matters — quick, accessible and persistent.</p> -->
+      </header>
+
+      <form id="task-form" class="row" aria-label="Add task">
+        <label for="input-box" class="visually-hidden">Add task</label>
+        <input type="text" id="input-box" name="task" placeholder="Add a new task..." autocomplete="off" required />
+        <button type="submit" class="btn primary">Add</button>
+      </form>
+
+      <div class="action-row" aria-hidden="false">
+        <button id="clear-completed" class="btn">Clear Completed</button>
+        <button id="clear-all" class="btn danger">Clear All</button>
       </div>
-      <div class="action-row">
-        <button onclick="clearCompleted()">Clear Completed</button>
-        <button onclick="clearAll()">Clear All</button>
+
+      <div class="task-summary" aria-live="polite">
+        <p>Total: <strong id="total-count">0</strong></p>
+        <p>Completed: <strong id="completed-count">0</strong></p>
       </div>
-      <div class="task-summary">
-        <p>Total: <span id="total-count">0</span></p>
-        <p>Completed: <span id="completed-count">0</span></p>
-      </div>
-      <ul id="list-container"></ul>
-    </div>
-  </div>
-  <script src="script.js"></script>
+
+      <ul id="list-container" class="task-list" role="list" aria-label="Task list"></ul>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
