@@ -6,6 +6,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const completedCount = document.getElementById('completed-count');
   const clearCompletedBtn = document.getElementById('clear-completed');
   const clearAllBtn = document.getElementById('clear-all');
+  const prioritySelect = document.getElementById('priority-select');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const themeToggleBtn = document.getElementById('theme-toggle');
+
+  let currentFilter = 'all';
+
+  if (localStorage.getItem('todo.theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('todo.theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+  });
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      render();
+    });
+  });
 
   let tasks = load();
 
@@ -19,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
       id: Date.now().toString(),
       text,
       done: false,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      priority: prioritySelect ? prioritySelect.value : 'medium'
     });
     input.value = '';
     save();
@@ -37,6 +61,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  list.addEventListener('dblclick', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    if (e.target.closest('.task-body')) {
+      li.classList.add('editing');
+      const editInput = li.querySelector('.edit-input');
+      editInput.focus();
+      const val = editInput.value;
+      editInput.value = '';
+      editInput.value = val;
+    }
+  });
+
+  list.addEventListener('focusout', (e) => {
+    if (e.target.matches('.edit-input')) {
+      saveEdit(e.target);
+    }
+  });
+
+  list.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter' && e.target.matches('.edit-input')) {
+      saveEdit(e.target);
+    } else if (e.key === 'Escape' && e.target.matches('.edit-input')) {
+      const li = e.target.closest('li');
+      li.classList.remove('editing');
+      const id = li.dataset.id;
+      const t = tasks.find(x => x.id === id);
+      if (t) e.target.value = t.text;
+    }
+  });
+
+  function saveEdit(inputElem) {
+    const li = inputElem.closest('li');
+    const id = li.dataset.id;
+    const newText = inputElem.value.trim();
+    const task = tasks.find(t => t.id === id);
+    if (newText && task) {
+      task.text = newText;
+      save();
+    }
+    li.classList.remove('editing');
+    render();
+  }
+
   clearCompletedBtn.addEventListener('click', () => {
     tasks = tasks.filter(t => !t.done);
     save(); render();
@@ -51,16 +119,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function render() {
     list.innerHTML = '';
-    tasks.forEach(t => {
+    const filteredTasks = tasks.filter(t => {
+      if (currentFilter === 'active') return !t.done;
+      if (currentFilter === 'completed') return t.done;
+      return true;
+    });
+
+    filteredTasks.forEach(t => {
       const li = document.createElement('li');
       li.className = 'task-item' + (t.done ? ' completed' : '');
       li.dataset.id = t.id;
+      const prio = t.priority || 'medium';
       li.innerHTML = `
         <input type="checkbox" ${t.done ? 'checked' : ''} aria-label="Mark task done">
-        <div class="task-body" style="flex:1;display:flex;flex-direction:column;gap:4px">
-          <span class="label">${escapeHtml(t.text)}</span>
+        <div class="task-body" style="flex:1;display:flex;flex-direction:column;gap:4px;cursor:text" title="Double-click to edit">
+          <span class="label">${escapeHtml(t.text)} <span class="priority-badge priority-${prio}">${prio}</span></span>
           <time class="meta" datetime="${t.createdAt}" style="font-size:.85rem;color:var(--muted)">${formatDate(t.createdAt)}</time>
         </div>
+        <input type="text" class="edit-input" value="${escapeHtml(t.text)}" aria-label="Edit task">
         <button class="delete-btn" aria-label="Delete task">✕</button>
       `;
       list.appendChild(li);

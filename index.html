@@ -12,16 +12,27 @@
 <body>
   <main class="container" aria-labelledby="app-title">
     <section class="todo-app" role="application" aria-labelledby="app-title">
-      <header class="app-header">
+      <header class="app-header" style="display: flex; justify-content: space-between; align-items: center;">
         <h1 id="app-title">To‑Do List</h1>
-        <!-- <p class="subtitle">Focus on what matters — quick, accessible and persistent.</p> -->
+        <button id="theme-toggle" class="btn" aria-label="Toggle dark mode">🌙</button>
       </header>
 
       <form id="task-form" class="row" aria-label="Add task">
         <label for="input-box" class="visually-hidden">Add task</label>
         <input type="text" id="input-box" name="task" placeholder="Add a new task..." autocomplete="off" required />
+        <select id="priority-select" class="btn" aria-label="Select Priority">
+          <option value="low">Low</option>
+          <option value="medium" selected>Med</option>
+          <option value="high">High</option>
+        </select>
         <button type="submit" class="btn primary">Add</button>
       </form>
+
+      <div class="filter-row" aria-label="Filter tasks">
+        <button class="btn filter-btn active" data-filter="all">All</button>
+        <button class="btn filter-btn" data-filter="active">Active</button>
+        <button class="btn filter-btn" data-filter="completed">Completed</button>
+      </div>
 
       <div class="action-row" aria-hidden="false">
         <button id="clear-completed" class="btn">Clear Completed</button>
