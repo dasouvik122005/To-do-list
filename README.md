@@ -15,7 +15,7 @@ This project was built from scratch to demonstrate core front-end web developmen
 * **Dark Mode:** A sleek dark theme toggle that remembers your preference.
 * **Task Priorities:** Assign Low, Medium, or High priority to tasks with visual badges.
 * **Smart Filtering:** Easily switch between viewing All, Active, or Completed tasks.
-* **Inline Editing:** Double-click any task to instantly edit its text without leaving the list.
+* **Inline Editing:** Double-click the task text to instantly edit it without leaving the list.
 * **Persistent Storage:** Tasks are saved in your browser's `localStorage`, so they remain even after you close the tab or refresh the page.
 * **Task Counters:** Get a live-updated count of your total tasks and how many you've completed.
 * **Bulk Actions:**
