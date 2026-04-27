@@ -7,7 +7,7 @@ A simple, responsive, and accessible to-do list application built with vanilla H
 This project was built from scratch to demonstrate core front-end web development skills, including DOM manipulation, event handling, and modern CSS styling.
 
 ## 🚀 Live Demo
-[https://souvik1210.me/To-do-list/](https://souvik1210.me/To-do-list/)
+[https://dasouvik122005.github.io/To-do-list/](https://dasouvik122005.github.io/To-do-list/)
 
 ## ✨ Features
 
