@@ -7,11 +7,15 @@ A simple, responsive, and accessible to-do list application built with vanilla H
 This project was built from scratch to demonstrate core front-end web development skills, including DOM manipulation, event handling, and modern CSS styling.
 
 ## 🚀 Live Demo
-`[https://souvik1210.me/To-do-list/]`
+[https://souvik1210.me/To-do-list/](https://souvik1210.me/To-do-list/)
 
 ## ✨ Features
 
 * **Add & Manage Tasks:** Quickly add new tasks, mark them as complete, or delete them individually.
+* **Dark Mode:** A sleek dark theme toggle that remembers your preference.
+* **Task Priorities:** Assign Low, Medium, or High priority to tasks with visual badges.
+* **Smart Filtering:** Easily switch between viewing All, Active, or Completed tasks.
+* **Inline Editing:** Double-click the task text to instantly edit it without leaving the list.
 * **Persistent Storage:** Tasks are saved in your browser's `localStorage`, so they remain even after you close the tab or refresh the page.
 * **Task Counters:** Get a live-updated count of your total tasks and how many you've completed.
 * **Bulk Actions:**
